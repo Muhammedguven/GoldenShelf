@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GoldenShelf.Views.BookPage"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="#EEEEEE">
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0"
+                                                                        EndPoint="0,1">
+            <GradientStop Color="#eeeeee"
+                                                                         Offset="0.6"/>
+            <GradientStop Color="#E6B614"
+                                                                         Offset="1.0"/>
+        </LinearGradientBrush>
+    </ContentPage.Background>
+    <ContentPage.Content>
+        
+        <AbsoluteLayout Padding="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <StackLayout AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All">
+            <ScrollView VerticalOptions="StartAndExpand">
+                <StackLayout>
+                    <StackLayout>
+
+                    <StackLayout>
+                        <AbsoluteLayout>
+                                <Image x:Name="adImage" HeightRequest="300" WidthRequest="415" HorizontalOptions="Center"  Aspect="AspectFit" Margin="0,0,0,-10"></Image>
+                            <AbsoluteLayout Padding="20,20,0,0" >
+                                <Image x:Name="back" Source="backto.png" HeightRequest="45"  HorizontalOptions="Start">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer></TapGestureRecognizer>
+                                    </Image.GestureRecognizers>
+                                </Image>
+                            </AbsoluteLayout>
+                        </AbsoluteLayout>
+                    </StackLayout>
+
+                        <StackLayout x:Name="imageBG">
+                        <Label x:Name="shareType" TextColor="Black" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,3,0,3"></Label>
+                    </StackLayout>
+                </StackLayout>
+
+                    <StackLayout Padding="30,10" >
+                        <Label x:Name="bookName"  TextColor="Black" FontAttributes="Bold" FontSize="36"></Label>
+                        <Label x:Name="bookAuthor"  TextColor="Black" FontSize="24" ></Label>
+                        <Label x:Name="bookCategory"  TextColor="Black" FontSize="20" Padding="0,10"></Label>
+                    </StackLayout>
+                   
+                    <StackLayout Orientation="Horizontal" Padding="30,10,30,0">
+                        <Label x:Name="condition" FontAttributes="Bold"  TextColor="Black" FontSize="18"></Label>
+                </StackLayout>
+
+                <StackLayout>
+                    <StackLayout Padding="20,0">
+                        <BoxView HeightRequest="2" BackgroundColor="#808080"></BoxView>
+                    </StackLayout>
+                    
+
+                    <StackLayout Padding="30,10">
+                        <Label x:Name="description"
+                               FontSize="17" TextColor="Black"></Label>
+                    </StackLayout>
+
+                    <StackLayout Padding="20,0">
+                        <BoxView HeightRequest="2" BackgroundColor="#808080"></BoxView>
+                    </StackLayout>
+                        <StackLayout Padding="30,10" Orientation="Horizontal">
+                            <Label x:Name="userName" FontSize="18" TextColor="Black" FontAttributes="Bold" HorizontalOptions="StartAndExpand"></Label>
+                            <Image Source="location.png" HeightRequest="20" WidthRequest="20"></Image>
+                            <Label x:Name="location" FontSize="18" TextColor="Black" FontAttributes="Italic" HorizontalOptions="End"></Label>
+                        </StackLayout>
+                            <Label x:Name="userEmail" IsVisible="false" FontSize="0" TextColor="Black" FontAttributes="Bold" HorizontalOptions="StartAndExpand"></Label>
+                        </StackLayout>
+                </StackLayout>
+        </ScrollView>
+                <StackLayout VerticalOptions="End">
+                    <AbsoluteLayout  VerticalOptions="End" x:Name="BgMessage">
+                        <Frame CornerRadius="20" BackgroundColor="#ECE0BD" HeightRequest="25" WidthRequest="300" AbsoluteLayout.LayoutBounds="20,10">
+                        </Frame>
+
+                        <Entry x:Name="messageText" Placeholder="Write a message here.." PlaceholderColor="DarkGray" FontSize="15" WidthRequest="300" VerticalOptions="End" AbsoluteLayout.LayoutBounds="30,20"></Entry>
+                        <ImageButton x:Name="sendButton" BackgroundColor="Transparent" Clicked="SendButton_Clicked" Source="send.png" HeightRequest="80" AbsoluteLayout.LayoutBounds="320,5"></ImageButton>
+
+                    </AbsoluteLayout>
+
+                </StackLayout>
+            
+
+
+        </StackLayout>
+
+            <ContentView BackgroundColor="#C0808080" x:Name="popUpImageViewAdvert" IsVisible="False" Padding="10,0" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All">
+                <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                    <Frame CornerRadius="20" BackgroundColor="#E6B614">
+                        <StackLayout WidthRequest="350" HeightRequest="200" Orientation="Vertical"  >
+                            <Label x:Name="PopUpTitleAdvert" FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" TextColor="Black"/>
+                            <BoxView HeightRequest="1" BackgroundColor="Black"/>
+                            <Label x:Name="PopUpLabelAdvert" HorizontalTextAlignment="Center" VerticalOptions="CenterAndExpand"/>
+                            <Button Text="ok!" Clicked="popUpButton" VerticalOptions="EndAndExpand" HorizontalOptions="End" Margin="5" CornerRadius="25" BackgroundColor="white"/>
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+            </ContentView>
+        </AbsoluteLayout>
+
+    </ContentPage.Content>
+</ContentPage>

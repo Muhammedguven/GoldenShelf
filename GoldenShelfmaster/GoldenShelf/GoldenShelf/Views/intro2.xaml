@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GoldenShelf.intro2"             
+             BackgroundColor="#E6B614"
+             NavigationPage.HasNavigationBar="False">
+
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+
+
+        <Label Text="Exchanging" HorizontalOptions="CenterAndExpand" Grid.Row="0" FontSize="50" FontAttributes="Bold" TextColor="Black" Margin="0,40,0,0"/>
+        <Label HorizontalTextAlignment="Center"  Text="You finished a book and you want to read something else? Use our application to exchange your books with &#10; other bookworms!" Grid.Row="1" HorizontalOptions="CenterAndExpand" FontSize="20" TextColor="Black" Margin="0,40,0,0"/>
+        <Image Source="bookIntro.png" Grid.Row="2" Margin="15"/>
+        <Button Text="Next" Grid.Row="3" BackgroundColor="White" CornerRadius="25" Margin="25,30" Clicked="Button_Clicked"/>
+
+    </Grid>
+</ContentPage>

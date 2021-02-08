@@ -1,0 +1,116 @@
+﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GoldenShelf.RegisterPage"             
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0"
+                                                                        EndPoint="0,1">
+            <GradientStop Color="White"
+                                                                         Offset="0.1"/>
+            <GradientStop Color="#eeeeee"
+                                                                         Offset="1.0"/>
+        </LinearGradientBrush>
+    </ContentPage.Background>
+    <AbsoluteLayout Padding="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+
+        <ScrollView AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All">
+
+            <StackLayout HorizontalOptions="Center" Margin="0,30,0,0">
+                <StackLayout Orientation="Horizontal" Padding="10,0,0,0">
+                    <Image x:Name="back" Source="back.png" HeightRequest="25" HorizontalOptions="StartAndExpand"/>
+                    <Image Source="goldenshelf.png" HeightRequest="30" HorizontalOptions="Center"></Image>
+                    <Label Text="Register" FontAttributes="Bold" FontSize="30" TextColor="Black" HorizontalOptions="Center" Padding="0,0,145,0"></Label>
+                </StackLayout>
+                <StackLayout Padding="10,0">
+                    <BoxView HeightRequest="1" Color="Black" Opacity="0.5"></BoxView>
+                </StackLayout>
+                <StackLayout Orientation="Vertical">
+                    <Frame BackgroundColor="#D2A612" CornerRadius="60"  WidthRequest="100" HeightRequest="100" HorizontalOptions="Center" VerticalOptions="Start"  Padding="0"   HasShadow="True">
+                        <Image x:Name="selectedImage" Source="imgclear.png"  Aspect="AspectFill" ></Image>
+                    </Frame>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                        <StackLayout HorizontalOptions="Start" Padding="0,10,0,0">
+                            <ImageButton Clicked="AddPhotoFromGallery" Source="addPhoto.png"  HeightRequest="50" BackgroundColor="Transparent"></ImageButton>
+                            <Label Text="From Gallery" FontAttributes="Bold" FontSize="14" TextColor="Black" Padding="10,0,0,0"></Label>
+                        </StackLayout>
+                        <StackLayout HorizontalOptions="Start" Padding="0,10,0,0">
+                            <ImageButton Clicked="TakePhoto" Source="camera.png" HeightRequest="50" BackgroundColor="Transparent"></ImageButton>
+                            <Label Text="From Camera" FontAttributes="Bold" FontSize="14" TextColor="Black" Padding="10,0,0,0"></Label>
+                        </StackLayout>
+                    </StackLayout>
+
+
+                </StackLayout>
+
+                <StackLayout Padding="20,0">
+
+                    <Frame CornerRadius="10" Margin="10,3" BackgroundColor="#FFFFFF" Padding="10">
+                        <StackLayout Orientation="Horizontal">
+
+                            <Image Source="user.png" HeightRequest="30" HorizontalOptions="Start"></Image>
+                            <Entry x:Name="name" MaxLength="20" Placeholder="Full Name" PlaceholderColor="Gray" WidthRequest="350" TextColor="Black"/>
+                        </StackLayout>
+                    </Frame>
+                    <Frame CornerRadius="10" Margin="10,3" BackgroundColor="#FFFFFF" Padding="10">
+                        <StackLayout Orientation="Horizontal">
+
+                            <Image Source="mail.png" HeightRequest="30" HorizontalOptions="Start"></Image>
+                            <Entry x:Name="email" MaxLength="30" Keyboard="Email"  Placeholder="E-Mail" PlaceholderColor="Gray" WidthRequest="350" TextColor="Black"/>
+                        </StackLayout>
+                    </Frame>
+                    <Frame CornerRadius="10" Margin="10,3" BackgroundColor="#FFFFFF" Padding="10">
+                        <StackLayout Orientation="Horizontal">
+
+                            <Image Source="lock.png" HeightRequest="30" HorizontalOptions="Start"></Image>
+                            <Entry x:Name="password" MaxLength="20" Placeholder="Password" IsPassword="True" PlaceholderColor="Gray" WidthRequest="350" TextColor="Black"/>
+                        </StackLayout>
+                    </Frame>
+                    <Frame CornerRadius="10" Margin="10,3" BackgroundColor="#FFFFFF" Padding="10">
+                        <StackLayout Orientation="Horizontal">
+
+                            <Image Source="lock.png" HeightRequest="30" HorizontalOptions="Start"></Image>
+                            <Entry x:Name="verifyPassword" MaxLength="20" Placeholder="Verify Password" IsPassword="True" PlaceholderColor="Gray" WidthRequest="350" TextColor="Black"/>
+                        </StackLayout>
+                    </Frame>
+                    <Frame CornerRadius="10" Margin="10,0,10,3" BackgroundColor="#FFFFFF" Padding="10">
+                        <StackLayout Orientation="Horizontal">
+
+                            <Image Source="city.png" HeightRequest="30" HorizontalOptions="Start"></Image>
+                            <Picker TextColor="Black" Title="City" TitleColor="Gray" WidthRequest="300"
+                                x:Name="cityPicker" 
+                                ItemsSource="{Binding CitiesList}"
+                                ItemDisplayBinding="{Binding Value}"
+                                SelectedItem="{Binding SelectedCity}" >
+                            </Picker>
+                        </StackLayout>
+                    </Frame>
+                    <Frame CornerRadius="10" Margin="10,3" BackgroundColor="#FFFFFF" Padding="10">
+                        <StackLayout Orientation="Horizontal">
+
+                            <Image Source="district.png" HeightRequest="30" HorizontalOptions="Start"></Image>
+                            <Picker x:Name="districtPicker" TextColor="Black" Title="District" TitleColor="Gray" WidthRequest="300" 
+                                ItemsSource="{Binding MyCity}"
+                                ItemDisplayBinding="{Binding Value}"
+                                SelectedItem="{Binding SelectedCity}">
+                            </Picker>
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+                <Label x:Name="Error" IsVisible="False" HorizontalOptions="Center"  TextColor="Red" FontSize="15"></Label>
+                <Button x:Name="Register" Text="REGISTER" BackgroundColor="#E6B614" CornerRadius="25" Margin="50,10" TextColor="White" Clicked="Button_Clicked"/>
+            </StackLayout>
+        </ScrollView>
+        <ContentView BackgroundColor="#C0808080" x:Name="popUpImageView" IsVisible="False" Padding="10,0" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All">
+            <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                <Frame CornerRadius="20" BackgroundColor="#E6B614">
+                    <StackLayout WidthRequest="350" HeightRequest="200" Orientation="Vertical"  >
+                        <Label x:Name="PopUpTitle" FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" TextColor="Black"/>
+                        <BoxView HeightRequest="1" BackgroundColor="Black"/>
+                        <Label x:Name="PopUpLabel" HorizontalTextAlignment="Center" VerticalOptions="CenterAndExpand"/>
+                        <Button Text="ok!" Clicked="popUpButton" VerticalOptions="EndAndExpand" HorizontalOptions="End" Margin="5" CornerRadius="25" BackgroundColor="white"/>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+        </ContentView>
+    </AbsoluteLayout>
+</ContentPage>

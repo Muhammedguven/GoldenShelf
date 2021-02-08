@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:Converter="clr-namespace:GoldenShelf.Converters"
+             x:Class="GoldenShelf.Views.CategoryList"
+             BackgroundColor="#EEEEEE"
+             NavigationPage.HasNavigationBar="False"
+             >
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Converter:ByteArrayToImageSourceConverter x:Key="bic"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="95"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackLayout Orientation="Horizontal" Padding="10,10,0,0" VerticalOptions="Start" Grid.Row="0">
+
+
+                <Frame BackgroundColor="#D2A612" CornerRadius="10" WidthRequest="350" HeightRequest="95">
+                    <StackLayout Orientation="Horizontal" >
+                        <Image x:Name="back" Source="back.png" HeightRequest="25" HorizontalOptions="Start"/>
+                        <Label x:Name="CategoryName" TextColor="White" FontSize="26" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" Margin="0,0,37,0" />
+
+                    </StackLayout>
+                </Frame>
+
+            </StackLayout>
+            <StackLayout Padding="10,0" Orientation="Horizontal" Grid.Row="1">
+                <ListView x:Name="DonationsListView" IsPullToRefreshEnabled="True" 
+                                      RefreshCommand="{Binding RefreshCommand}"
+                                      IsRefreshing="{Binding IsRefreshing}" 
+                                      RowHeight="250" Header="" 
+                                      ItemTapped="DonationListview_ItemTapped">
+                    <ListView.HeaderTemplate>
+                        <DataTemplate>
+                            <Label Text="Donations" FontSize="20" FontAttributes="Bold" TextColor="#1B9101" HorizontalTextAlignment="Center" ></Label>
+                        </DataTemplate>
+                    </ListView.HeaderTemplate>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Frame CornerRadius="20" Margin="0,5" Padding="0,0"  >
+                                    <Frame.Background>
+                                        <LinearGradientBrush StartPoint="0,0"
+                                                             EndPoint="1,0">
+                                            <GradientStop Color="#005F24"
+                                                          Offset="0.1"/>
+                                            <GradientStop Color="#1B9101"
+                                                           Offset="1.0"/>
+                                        </LinearGradientBrush>
+                                    </Frame.Background>
+                                    <StackLayout>
+                                        <Image Source="{Binding Image,Converter={StaticResource bic}}" Aspect="AspectFill" HeightRequest="120"  WidthRequest="80"></Image>
+                                        <BoxView HeightRequest="1" BackgroundColor="White"></BoxView>
+                                        <Label Text="{Binding BookName}" FontAttributes="Bold" TextColor="White" FontSize="17" Padding="5,0,0,0" HorizontalTextAlignment="Start"></Label>
+                                        <Label Text="{Binding BookAuthor}" FontAttributes="Bold" TextColor="White" FontSize="14" Padding="5,0,0,0" HorizontalTextAlignment="Start"></Label>
+                                        <Label Text="{Binding BookCategory}" FontAttributes="Bold" TextColor="White" FontSize="12" Padding="5,0,0,0" HorizontalTextAlignment="Start"></Label>
+                                        <Label Text="Donation" FontAttributes="Bold" TextColor="Black" Opacity="0.5" FontSize="14" Padding="5,0,0,0" HorizontalTextAlignment="Center"></Label>
+                                    </StackLayout>
+                                </Frame>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <ListView x:Name="ExchangesListView" RowHeight="250" Header="" ItemTapped="ExchangeListview_ItemTapped"
+                                      IsPullToRefreshEnabled="True" 
+                                      RefreshCommand="{Binding RefreshCommand}"
+                                      IsRefreshing="{Binding IsRefreshing}" >
+                    <ListView.HeaderTemplate>
+                        <DataTemplate>
+                            <Label Text="Exchanges" FontSize="20" FontAttributes="Bold" TextColor="#00B5B9" HorizontalTextAlignment="Center" ></Label>
+                        </DataTemplate>
+                    </ListView.HeaderTemplate>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Frame CornerRadius="20" Margin="0,5" Padding="0,0"  >
+                                    <Frame.Background>
+                                        <LinearGradientBrush StartPoint="1,0"
+                                                            EndPoint="0,0">
+                                            <GradientStop Color="#026F63"
+                                                           Offset="0.1"/>
+                                            <GradientStop Color="#00BEC4"
+                                                           Offset="1.0"/>
+                                        </LinearGradientBrush>
+                                    </Frame.Background>
+                                    
+                                    <StackLayout>
+                                        <Image Source="{Binding Image,Converter={StaticResource bic}}" Aspect="AspectFill"  HeightRequest="120"  WidthRequest="80"></Image>
+                                        <BoxView HeightRequest="1" BackgroundColor="White"></BoxView>
+                                        <Label Text="{Binding BookName}" FontAttributes="Bold" TextColor="White" FontSize="17" Padding="5,0,0,0" HorizontalTextAlignment="Start"></Label>
+                                        <Label Text="{Binding BookAuthor}" FontAttributes="Bold" TextColor="White" FontSize="14" Padding="5,0,0,0" HorizontalTextAlignment="Start"></Label>
+                                        <Label Text="{Binding BookCategory}" FontAttributes="Bold" TextColor="White" FontSize="12" Padding="5,0,0,0" HorizontalTextAlignment="Start"></Label>
+                                        <Label Text="Exchange" FontAttributes="Bold" TextColor="Black" Opacity="0.5" FontSize="14" Padding="5,0,0,0" HorizontalTextAlignment="Center"></Label>
+                                    </StackLayout>
+                                </Frame>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+        </Grid>
+
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,568 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Shell xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GoldenShelf.Views.HomePage"
+             xmlns:Converter="clr-namespace:GoldenShelf.Converters"
+             FlyoutBackgroundColor="#E6B614"
+             Shell.NavBarIsVisible="False"
+            Shell.TabBarBackgroundColor="#ffffff"
+       Shell.UnselectedColor="Black"
+       Shell.TabBarTitleColor="#E6B614">
+
+
+    <Shell.Resources>
+        <ResourceDictionary>
+            <Converter:ByteArrayToImageSourceConverter x:Key="bic"/>
+        </ResourceDictionary>
+    </Shell.Resources>
+
+
+    <FlyoutItem FlyoutIcon="user.png" Title="GoldenShelf"  >
+        <Tab Icon="home.png" Title="Home" FlyoutIcon="home.png" >
+            <ShellContent >
+                <ContentPage>
+                    <ContentPage.Background>
+                        <LinearGradientBrush StartPoint="0,0"
+                                                                        EndPoint="0,1">
+                            <GradientStop Color="White"
+                                                                         Offset="0.1"/>
+                            <GradientStop Color="#eeeeee"
+                                                                         Offset="1.0"/>
+                        </LinearGradientBrush>
+                    </ContentPage.Background>
+                    <AbsoluteLayout Padding="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+
+                        <Grid AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="60"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <AbsoluteLayout  VerticalOptions="StartAndExpand" Padding="0,5,0,0" Grid.Row="0">
+                                <Image Source="goldenshelf.png" HeightRequest="40" WidthRequest="50"  AbsoluteLayout.LayoutBounds="10,15"></Image>
+                                <Frame CornerRadius="45" BackgroundColor="#ECE0BD" HeightRequest="4" WidthRequest="210" AbsoluteLayout.LayoutBounds="60,10">
+                                </Frame>
+                                <StackLayout AbsoluteLayout.LayoutBounds="50,10" HorizontalOptions="Fill" WidthRequest="210">
+                                    <SearchBar x:Name="BookSearchBar" Placeholder="Search anything.." TextColor="Black"  PlaceholderColor="Gray" CancelButtonColor="#E6B614" HorizontalOptions="FillAndExpand"  FontSize="15"  VerticalOptions="End" 
+                                       TextChanged="BookSearchBar_TextChanged"
+                                       ></SearchBar>
+                                </StackLayout>
+                                <ImageButton Clicked="Filter_Clicked" Source="filter.png" HeightRequest="35" AbsoluteLayout.LayoutBounds="315,15"></ImageButton>
+                                <ImageButton Clicked="SettingsButton_Clicked" Source="settings.png" HeightRequest="30" AbsoluteLayout.LayoutBounds="365,18"></ImageButton>
+                            </AbsoluteLayout>
+
+                            <StackLayout Padding="10,0" Orientation="Horizontal" Grid.Row="1">
+                                <ListView x:Name="DonationsListView" IsPullToRefreshEnabled="True" 
+                                      RefreshCommand="{Binding RefreshCommand}"
+                                      IsRefreshing="{Binding IsRefreshing}" 
+                                      RowHeight="250" Header="" 
+                                      ItemTapped="DonationListview_ItemTapped">
+                                    <ListView.HeaderTemplate>
+                                        <DataTemplate>
+                                            <Label Text="Donations" FontSize="20" FontAttributes="Bold" TextColor="#1B9101" HorizontalTextAlignment="Center" ></Label>
+                                        </DataTemplate>
+                                    </ListView.HeaderTemplate>
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <ViewCell>
+                                                <Frame CornerRadius="20" Margin="0,5" Padding="0,0"  >
+                                                    <Frame.Background>
+                                                        <LinearGradientBrush StartPoint="0,0"
+                                                                        EndPoint="1,0">
+                                                            <GradientStop Color="#005F24"
+                                                                         Offset="0.1"/>
+                                                            <GradientStop Color="#1B9101"
+                                                                         Offset="1.0"/>
+                                                        </LinearGradientBrush>
+                                                    </Frame.Background>
+                                                    <StackLayout>
+                                                        <Image Source="{Binding Image,Converter={StaticResource bic}}" Aspect="AspectFill" HeightRequest="120"  WidthRequest="80"></Image>
+                                                        <BoxView HeightRequest="1" BackgroundColor="White"></BoxView>
+                                                        <Label Text="{Binding BookName}" FontAttributes="Bold" TextColor="White" FontSize="17" Padding="5,0,0,0" HorizontalTextAlignment="Start"></Label>
+                                                        <Label Text="{Binding BookAuthor}" FontAttributes="Bold" TextColor="White" FontSize="14" Padding="5,0,0,0" HorizontalTextAlignment="Start"></Label>
+                                                        <Label Text="{Binding BookCategory}" FontAttributes="Bold" TextColor="White" FontSize="12" Padding="5,0,0,0" HorizontalTextAlignment="Start"></Label>
+                                                        <Label Text="Donation" FontAttributes="Bold" TextColor="Black" Opacity="0.5" FontSize="14" Padding="5,0,0,0" HorizontalTextAlignment="Center"></Label>
+                                                    </StackLayout>
+                                                </Frame>
+                                            </ViewCell>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                                <ListView x:Name="ExchangesListView" RowHeight="250" Header="" ItemTapped="ExchangeListview_ItemTapped"
+                                      IsPullToRefreshEnabled="True" 
+                                      RefreshCommand="{Binding RefreshCommand}"
+                                      IsRefreshing="{Binding IsRefreshing}" >
+                                    <ListView.HeaderTemplate>
+                                        <DataTemplate>
+                                            <Label Text="Exchanges" FontSize="20" FontAttributes="Bold" TextColor="#00B5B9" HorizontalTextAlignment="Center" ></Label>
+                                        </DataTemplate>
+                                    </ListView.HeaderTemplate>
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <ViewCell>
+                                                <Frame  CornerRadius="20" Margin="0,5" Padding="0,0"  >
+                                                    <Frame.Background>
+                                                        <LinearGradientBrush StartPoint="1,0"
+                                                                        EndPoint="0,0">
+                                                            <GradientStop Color="#026F63"
+                                                                         Offset="0.1"/>
+                                                            <GradientStop Color="#00BEC4"
+                                                                         Offset="1.0"/>
+                                                        </LinearGradientBrush>
+                                                    </Frame.Background>
+                                                    <StackLayout>
+                                                        <Image Source="{Binding Image,Converter={StaticResource bic}}" Aspect="AspectFill"  HeightRequest="120"  WidthRequest="80"></Image>
+                                                        <BoxView HeightRequest="1" BackgroundColor="White"></BoxView>
+                                                        <Label Text="{Binding BookName}" FontAttributes="Bold" TextColor="White" FontSize="17" Padding="5,0,0,0" HorizontalTextAlignment="Start"></Label>
+                                                        <Label Text="{Binding BookAuthor}" FontAttributes="Bold" TextColor="White" FontSize="14" Padding="5,0,0,0" HorizontalTextAlignment="Start"></Label>
+                                                        <Label Text="{Binding BookCategory}" FontAttributes="Bold" TextColor="White" FontSize="12" Padding="5,0,0,0" HorizontalTextAlignment="Start"></Label>
+                                                        <Label Text="Exchange" FontAttributes="Bold" TextColor="Black" Opacity="0.5" FontSize="14" Padding="5,0,0,0" HorizontalTextAlignment="Center"></Label>
+                                                    </StackLayout>
+                                                </Frame>
+                                            </ViewCell>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </StackLayout>
+
+                        </Grid>
+                        <ContentView BackgroundColor="#C0808080" x:Name="popUpImageView" IsVisible="False" Padding="10,0" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All">
+                            <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                                <Frame CornerRadius="20" BackgroundColor="#E6B614">
+                                    <StackLayout WidthRequest="350" HeightRequest="200" Orientation="Vertical"  >
+                                        <Label x:Name="PopUpTitle" FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" TextColor="Black"/>
+                                        <BoxView HeightRequest="1" BackgroundColor="Black"/>
+                                        <Label x:Name="PopUpLabel" HorizontalTextAlignment="Center" VerticalOptions="CenterAndExpand"/>
+                                        <Button Text="ok!" Clicked="popUpButton" VerticalOptions="EndAndExpand" HorizontalOptions="End" Margin="5" CornerRadius="25" BackgroundColor="white"/>
+                                    </StackLayout>
+                                </Frame>
+                            </StackLayout>
+                        </ContentView>
+                    </AbsoluteLayout>
+                </ContentPage>
+            </ShellContent>
+        </Tab>
+        <Tab Icon="category.png" Title="Category" FlyoutIcon="category.png">
+            <ShellContent>
+                <ContentPage>
+                    <ContentPage.Background>
+                        <LinearGradientBrush StartPoint="0,0"
+                                                                        EndPoint="0,1">
+                            <GradientStop Color="White"
+                                                                         Offset="0.1"/>
+                            <GradientStop Color="#eeeeee"
+                                                                         Offset="1.0"/>
+                        </LinearGradientBrush>
+                    </ContentPage.Background>
+                    <ScrollView>
+                        <StackLayout>
+
+
+                            <AbsoluteLayout  VerticalOptions="StartAndExpand" Padding="0,5,0,0">
+                                <Image Source="goldenshelf.png" HeightRequest="40" WidthRequest="50"  AbsoluteLayout.LayoutBounds="10,15"></Image>
+                                <Label Text="GoldenShelf" FontSize="30" HorizontalOptions="Center" FontAttributes="Bold" TextColor="#D2A612" WidthRequest="230" VerticalOptions="End" AbsoluteLayout.LayoutBounds="120,13"></Label>
+                                <ImageButton Clicked="SettingsButton_Clicked" Source="settings.png" HeightRequest="30" AbsoluteLayout.LayoutBounds="365,20"></ImageButton>
+
+                            </AbsoluteLayout>
+                            <StackLayout Padding="10,0">
+                                <BoxView HeightRequest="2" Color="#D2A612" Opacity="0.5"></BoxView>
+                                <ListView x:Name="CategoryListView" RowHeight="150" Grid.Row="1" ItemTapped="CategoryListView_ItemTapped">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <ViewCell>
+                                                <Frame CornerRadius="15" Padding="5" Margin="5" BackgroundColor="#D2A612" >
+
+                                                    <StackLayout Orientation="Horizontal" Spacing="5" >
+                                                        <Image Source="{Binding CategoryImage}" Margin="5" Aspect="AspectFill" WidthRequest="80" HeightRequest="60"/>
+                                                        <Label Text="{Binding CategoryName}" TextColor="White" FontSize="23" FontAttributes="Bold" VerticalOptions="Center" Margin="35,0,0,0"/>
+
+                                                    </StackLayout>
+
+
+                                                </Frame>
+
+                                            </ViewCell>
+
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </StackLayout>
+                        </StackLayout>
+                    </ScrollView>
+
+                </ContentPage>
+            </ShellContent>
+        </Tab>
+        <Tab Icon="plus.png" Title="Share" FlyoutIcon="plus.png">
+            <ShellContent>
+                <ContentPage >
+                    <ContentPage.Background>
+                        <LinearGradientBrush StartPoint="0,0"
+                                                                        EndPoint="0,1">
+                            <GradientStop Color="White"
+                                                                         Offset="0.1"/>
+                            <GradientStop Color="#eeeeee"
+                                                                         Offset="1.0"/>
+                        </LinearGradientBrush>
+                    </ContentPage.Background>
+                    <AbsoluteLayout Padding="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                        <ScrollView AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All">
+
+                            <StackLayout Padding="0,20,0,0" >
+                                <StackLayout Orientation="Horizontal" Padding="0,0,0,0" HorizontalOptions="Center">
+
+                                    <Image Source="goldenshelf.png" HeightRequest="30" HorizontalOptions="Center"></Image>
+                                    <Label Text="Share Book" FontAttributes="Bold" FontSize="30" TextColor="#D2A612" HorizontalOptions="Center"></Label>
+                                </StackLayout>
+                                <StackLayout Padding="10,0">
+                                    <BoxView HeightRequest="2" Color="#D2A612" Opacity="0.5"></BoxView>
+                                </StackLayout>
+                                <StackLayout Spacing="10">
+                                    <StackLayout Orientation="Horizontal" Padding="35,0" Spacing="30">
+                                        <StackLayout HorizontalOptions="Start" Padding="10,20,50,0">
+                                            <ImageButton Clicked="AddPhotoFromGallery" Source="addPhoto.png" HeightRequest="50" BackgroundColor="Transparent"></ImageButton>
+                                            <Label Text="From Gallery" FontAttributes="Bold" FontSize="14" TextColor="Black" Padding="10,0,0,0"></Label>
+                                            <ImageButton Clicked="TakePhoto" Source="camera.png" HeightRequest="50" BackgroundColor="Transparent"></ImageButton>
+                                            <Label Text="From Camera" FontAttributes="Bold" FontSize="14" TextColor="Black" Padding="10,0,0,0"></Label>
+                                        </StackLayout>
+                                        <Frame  CornerRadius="20"  WidthRequest="100" HeightRequest="150" HorizontalOptions="End" Padding="10,0" Margin="0,15" Opacity="0.9"  HasShadow="True">
+                                            <Frame.Background>
+                                                <LinearGradientBrush StartPoint="0,0"
+                                                                        EndPoint="0,1">
+                                                    <GradientStop Color="White"
+                                                                         Offset="0.6"/>
+                                                    <GradientStop Color="#E6B614"
+                                                                         Offset="1.0"/>
+                                                </LinearGradientBrush>
+                                            </Frame.Background>
+                                            <Image x:Name="selectedImage" Source="imgclear.png"  Aspect="AspectFit" ></Image>
+                                        </Frame>
+
+                                    </StackLayout>
+                                    <StackLayout Padding="10,0">
+                                        <BoxView HeightRequest="2" Color="#D2A612" Opacity="0.5"></BoxView>
+                                    </StackLayout>
+
+                                    <Label Text="Would you like to donate or exhange?" FontAttributes="Bold" FontSize="15" TextColor="Black" Padding="20,0,0,0"></Label>
+                                    <Frame WidthRequest="300" HeightRequest="35" HasShadow="True"  CornerRadius="20" HorizontalOptions="Center">
+                                        <StackLayout Orientation="Horizontal">
+
+                                            <Image Source="exchangeDonate.png" HeightRequest="40" HorizontalOptions="Start" ></Image>
+                                            <Picker  x:Name="shareTypePicker"  Title="Select a share type" TitleColor="Black" FontAttributes="Bold" FontSize="14" HorizontalOptions="Center" WidthRequest="250">
+                                                <Picker.Items>
+                                                    <x:String>Exchange</x:String>
+                                                    <x:String>Donate</x:String>
+                                                </Picker.Items>
+                                            </Picker>
+                                        </StackLayout>
+                                    </Frame>
+                                    <Frame WidthRequest="300" HeightRequest="35" HasShadow="True"  CornerRadius="20" HorizontalOptions="Center">
+                                        <StackLayout Orientation="Horizontal">
+
+                                            <Image Source="bookCategory.png" HeightRequest="40" HorizontalOptions="Start"></Image>
+                                            <Picker x:Name="bookCategoryPicker" Title="Category" TitleColor="Black" FontAttributes="Bold" FontSize="14" HorizontalOptions="Center" WidthRequest="250">
+                                                <Picker.Items>
+                                                    <x:String>TYT AYT</x:String>
+                                                    <x:String>LGS</x:String>
+                                                    <x:String>YDS TOEFL</x:String>
+                                                    <x:String>Academic Book</x:String>
+                                                    <x:String>Children's Book</x:String>
+                                                    <x:String>Novel</x:String>
+                                                    <x:String>Poem</x:String>
+                                                    <x:String>Comic Book</x:String>
+                                                    <x:String>Others</x:String>
+                                                </Picker.Items>
+                                            </Picker>
+                                        </StackLayout>
+                                    </Frame>
+                                    <Frame WidthRequest="300" HeightRequest="35" HasShadow="True"  CornerRadius="20" HorizontalOptions="Center">
+                                        <StackLayout Orientation="Horizontal">
+
+                                            <Image Source="bookTitle.png" HeightRequest="40" HorizontalOptions="Start"></Image>
+                                            <Entry x:Name="bookName" MaxLength="20" Placeholder="Book Name" Keyboard="Text" PlaceholderColor="Black" FontAttributes="Bold" FontSize="14" HorizontalOptions="Center" WidthRequest="250"/>
+                                        </StackLayout>
+                                    </Frame>
+                                    <Frame WidthRequest="300" HeightRequest="35" HasShadow="True"  CornerRadius="20" HorizontalOptions="Center">
+                                        <StackLayout Orientation="Horizontal">
+
+                                            <Image Source="author.png" HeightRequest="40" HorizontalOptions="Start"></Image>
+                                            <Entry x:Name="bookAuthor" MaxLength="20" Placeholder="Author" Keyboard="Text" PlaceholderColor="Black" FontAttributes="Bold" FontSize="14" HorizontalOptions="Center" WidthRequest="250"/>
+                                        </StackLayout>
+                                    </Frame>
+                                    <Frame WidthRequest="300" HeightRequest="35" HasShadow="True"  CornerRadius="20" HorizontalOptions="Center">
+                                        <StackLayout Orientation="Horizontal">
+
+                                            <Image Source="tornBook.png" HeightRequest="40" HorizontalOptions="Start"></Image>
+                                            <Picker x:Name="bookConditionPicker" Title="Condition" TitleColor="Black" FontAttributes="Bold" FontSize="14" HorizontalOptions="Center" WidthRequest="250">
+                                                <Picker.Items>
+                                                    <x:String>Like New</x:String>
+                                                    <x:String>Little Used</x:String>
+                                                    <x:String>A Little Torn</x:String>
+                                                    <x:String>Tattered</x:String>
+                                                </Picker.Items>
+                                            </Picker>
+                                        </StackLayout>
+                                    </Frame>
+                                </StackLayout>
+                                <StackLayout Padding="10,0">
+                                    <BoxView HeightRequest="2" Color="#D2A612" Opacity="0.5"></BoxView>
+                                </StackLayout>
+                                <StackLayout Padding="0,0,0,10">
+                                    <Label Text="Description(Optional)" FontAttributes="Bold" FontSize="15" TextColor="Black" Padding="20,0,0,0"></Label>
+                                    <Frame WidthRequest="300" HeightRequest="120" HasShadow="True"  CornerRadius="20" HorizontalOptions="Center">
+                                        <Editor x:Name="description" MaxLength="200" HeightRequest="80" Placeholder="If you want to give more details, write here." PlaceholderColor="#343a40" FontSize="14" TextColor="Black"></Editor>
+                                    </Frame>
+                                </StackLayout>
+                                <StackLayout Padding="0,0,0,20">
+                                    <Button Clicked="Share_Clicked" HorizontalOptions="Center" Text="Share" BorderColor="#343a40" BackgroundColor="#E6B614" CornerRadius="30" FontAttributes="Bold" FontSize="15" TextColor="White" Padding="100,0,100,0"/>
+                                </StackLayout>
+
+                            </StackLayout>
+                        </ScrollView>
+                        <ContentView BackgroundColor="#C0808080" x:Name="popUpImageViewShare" IsVisible="False" Padding="10,0" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All">
+                            <StackLayout HorizontalOptions="Center" Margin="0,200,0,0">
+                                <Frame CornerRadius="20" BackgroundColor="#E6B614">
+                                    <StackLayout WidthRequest="350" HeightRequest="200" Orientation="Vertical"  >
+                                        <Label x:Name="PopUpTitleShare" FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" TextColor="Black"/>
+                                        <BoxView HeightRequest="1" BackgroundColor="Black"/>
+                                        <Label x:Name="PopUpLabelShare" HorizontalTextAlignment="Center" VerticalOptions="CenterAndExpand"/>
+                                        <Button Text="ok!" Clicked="popUpButtonShare" VerticalOptions="EndAndExpand" HorizontalOptions="End" Margin="5" CornerRadius="25" BackgroundColor="white"/>
+                                    </StackLayout>
+                                </Frame>
+                            </StackLayout>
+                        </ContentView>
+                    </AbsoluteLayout>
+                </ContentPage>
+            </ShellContent>
+        </Tab>
+        <Tab Icon="messages.png" Title="Messages" FlyoutIcon="messages.png">
+            <ShellContent>
+                <ContentPage >
+                    <ContentPage.Background>
+                        <LinearGradientBrush StartPoint="0,0"
+                                                                        EndPoint="0,1">
+                            <GradientStop Color="White"
+                                                                         Offset="0.1"/>
+                            <GradientStop Color="#eeeeee"
+                                                                         Offset="1.0"/>
+                        </LinearGradientBrush>
+                    </ContentPage.Background>
+                    <AbsoluteLayout Padding="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                        <ScrollView AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All">
+
+                            <StackLayout>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="10,20,0,0">
+                                <Image Source="goldenshelf.png" HeightRequest="30" HorizontalOptions="Center"></Image>
+                                <Label Text="Messages" FontAttributes="Bold" FontSize="30" TextColor="#D2A612" HorizontalOptions="End" Padding="0,0,20,0"></Label>
+                            </StackLayout>
+                            <BoxView HeightRequest="2" Color="#D2A612" Opacity="0.5"></BoxView>
+
+                            <ListView x:Name="MessageListView" 
+                                          ItemTapped="MessageListView_ItemTapped"
+                                          Margin="10,0"
+                                          RowHeight="120" 
+                                          Header=""
+                                          IsPullToRefreshEnabled="True" 
+                                          RefreshCommand="{Binding RefreshCommand}"
+                                          IsRefreshing="{Binding IsRefreshing}" 
+                      >
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                            <Frame  BackgroundColor="#cba135" CornerRadius="20"  Margin="0,5" Padding="5,0">
+                                                    <Frame.Background>
+                                                        <LinearGradientBrush StartPoint="0,0"
+                                                                        EndPoint="1,0">
+                                                            <GradientStop Color="#E6B614"
+                                                                         Offset="0.1"/>
+                                                            <GradientStop Color="#cba135"
+                                                                         Offset="1.0"/>
+                                                        </LinearGradientBrush>
+                                                    </Frame.Background>
+                                                    <StackLayout Orientation="Horizontal"  Padding="20,5">
+                                                    <StackLayout Orientation="Vertical" Padding="0,20">
+                                                        <Image Source="deal.png" Aspect="AspectFit"  WidthRequest="40" HeightRequest="40" HorizontalOptions="Start"></Image>
+
+                                                    </StackLayout>
+
+                                                    <StackLayout HorizontalOptions="StartAndExpand" Padding="30,0">
+                                                        <Label Text="{Binding SpecialBookName}" FontAttributes="Bold" TextColor="White" FontSize="17" HorizontalTextAlignment="Start"></Label>
+                                                        <Label Text="{Binding Sender}" FontAttributes="Bold" TextColor="White" FontSize="15" HorizontalTextAlignment="Start"></Label>
+                                                        <Label Text="{Binding MessageText}" TextColor="White" FontSize="13" HorizontalTextAlignment="Start"></Label>
+                                                        <Label Text="{Binding Id}" FontSize="0" IsVisible="False"></Label>
+                                                        <Label Text="{Binding Receiver}" FontSize="0" IsVisible="False"></Label>
+                                                        <Label Text="{Binding Date}" FontSize="0" IsVisible="False"></Label>
+                                                        <Label Text="{Binding Location}" FontSize="0" IsVisible="False"></Label>
+                                                    </StackLayout>
+                                                    <ImageButton  CommandParameter="{Binding .}" Clicked="DeleteButton_Clicked"  Source="remove.png" HeightRequest="40"  Padding="10,0" VerticalOptions="Center" BackgroundColor="Transparent"></ImageButton>
+                                                </StackLayout>
+                                            </Frame>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+
+
+                        </StackLayout>
+                    </ScrollView>
+                    <ContentView BackgroundColor="#C0808080" x:Name="popUpImageViewMessage" IsVisible="False" Padding="10,0" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All">
+                        <StackLayout HorizontalOptions="Center" Margin="0,200,0,0">
+                            <Frame CornerRadius="20" BackgroundColor="#E6B614">
+                                <StackLayout WidthRequest="350" HeightRequest="200" Orientation="Vertical"  >
+                                    <Label x:Name="PopUpTitleMessage" FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Start" TextColor="Black"/>
+                                    <BoxView HeightRequest="1" BackgroundColor="Black"/>
+                                        <Label x:Name="PopUpLabelMessage" HorizontalTextAlignment="Center" VerticalOptions="CenterAndExpand"/>
+                                        <Button Text="ok!" Clicked="popUpButtonMessage" VerticalOptions="EndAndExpand" HorizontalOptions="End" Margin="5" CornerRadius="25" BackgroundColor="white"/>
+                                </StackLayout>
+                            </Frame>
+                        </StackLayout>
+                    </ContentView>
+                    </AbsoluteLayout>
+                </ContentPage>
+            </ShellContent>
+        </Tab>
+        <Tab Icon="user.png" Title="My Profile" FlyoutIcon="user.png">
+            <ShellContent>
+                <ContentPage >
+                    <ContentPage.Background>
+                        <LinearGradientBrush StartPoint="0,0"
+                                                                        EndPoint="0,1">
+                            <GradientStop Color="White"
+                                                                         Offset="0.1"/>
+                            <GradientStop Color="#eeeeee"
+                                                                         Offset="1.0"/>
+                        </LinearGradientBrush>
+                    </ContentPage.Background>
+                    <ScrollView>
+                        <StackLayout>
+                            <StackLayout Orientation="Horizontal" Padding="0,20,0,0" HorizontalOptions="Center">
+
+                                <Image Source="goldenshelf.png" HeightRequest="30" HorizontalOptions="StartAndExpand"></Image>
+                                <Label Text="My Profile" FontAttributes="Bold" FontSize="30" TextColor="#D2A612" HorizontalOptions="Center"></Label>
+                            </StackLayout>
+                            <StackLayout BackgroundColor="White">
+                                <BoxView HeightRequest="2" Color="#D2A612" Opacity="0.5"></BoxView>
+                                <StackLayout Orientation="Horizontal" Padding="0,20,20,20" >
+                                    <StackLayout Padding="20,0,10,0">
+                                        <Frame BackgroundColor="#D2A612" CornerRadius="60" Padding="2,2,2,2" Margin="2,2,2,2">
+                                            <Frame CornerRadius="60" Padding="0,0,0,0" Margin="0,0,0,0">
+                                                <Image x:Name="userImage"  WidthRequest="100" HeightRequest="100" Aspect="AspectFill" HorizontalOptions="Start"></Image>
+                                            </Frame>
+                                        </Frame>
+                                       
+                                    </StackLayout>
+                                    <StackLayout HorizontalOptions="Start">
+                                        <Label x:Name="profileTabName"  TextColor="#000000" FontSize="26" FontAttributes="Bold" HorizontalTextAlignment="Start"></Label>
+                                        <Label x:Name="profileTabLocation" TextColor="#000000"  HorizontalTextAlignment="Start"  FontSize="16"></Label>
+                                        <Label x:Name="profileTabEmail" Text="" TextColor="Gray"  HorizontalTextAlignment="Start"  FontSize="16"></Label>
+                                    </StackLayout>
+                                </StackLayout>
+                                <BoxView HeightRequest="1" Color="Black" Opacity="0.5"></BoxView>
+                            </StackLayout>
+
+
+
+                            <StackLayout BackgroundColor="White">
+                                <Label Text="Profile" 
+                   TextColor="#000000" 
+                   FontSize="20" 
+                   FontAttributes="Bold"
+                   Padding="20,10,0,0"
+                   ></Label>
+
+                                <StackLayout Padding="10,0,0,0" Margin="0,0,0,10">
+
+                                    <StackLayout Orientation="Horizontal" Padding="20,15,0,0"  >
+                                        <StackLayout Padding="0,0,15,0">
+                                            <ImageButton BackgroundColor="Transparent" Clicked="MyAdvertsButton_Clicked" Source="adverts.png" WidthRequest="30" HeightRequest="30"></ImageButton>
+                                        </StackLayout>
+                                        <StackLayout>
+                                            <Label x:Name="myAdverts"  Text="My Adverts" TextColor="#cba135" FontSize="17" FontAttributes="Bold" ></Label>
+                                        </StackLayout>
+                                    </StackLayout>
+
+                                    <StackLayout Orientation="Horizontal" Padding="20,15,0,0">
+                                        <StackLayout Padding="0,0,15,0">
+                                            <Image x:Name="userProfile" Source="user.png"  WidthRequest="30" HeightRequest="30"></Image>
+                                        </StackLayout>
+                                        <StackLayout  >
+                                            <Label Text="Name" TextColor="#000000" FontSize="17" FontAttributes="Bold" Margin="0,-5,0,-10" ></Label>
+                                            <Label x:Name="changeName" Text="" TextColor="#000000" FontSize="13" ></Label>
+                                        </StackLayout>
+                                    </StackLayout>
+
+                                    <StackLayout Orientation="Horizontal" Padding="20,15,0,0" >
+                                        <StackLayout Padding="0,0,15,0">
+                                            <Image x:Name="email" Source="mail.png" WidthRequest="30" HeightRequest="30"></Image>
+                                        </StackLayout>
+                                        <StackLayout  >
+                                            <Label Text="Email" TextColor="#000000" FontSize="17" FontAttributes="Bold" Margin="0,-5,0,-10"></Label>
+                                            <Label x:Name="changeEmail" TextColor="#000000" FontSize="13"></Label>
+                                        </StackLayout>
+                                    </StackLayout>
+
+                                    <StackLayout Orientation="Horizontal" Padding="20,15,0,0">
+                                        <StackLayout Padding="0,0,15,0">
+                                            <Image x:Name="location" Source="location.png" WidthRequest="30" HeightRequest="30"></Image>
+                                        </StackLayout>
+                                        <StackLayout >
+                                            <Label Text="Location" TextColor="#000000" FontSize="17" FontAttributes="Bold" Margin="0,-5,0,-10"></Label>
+                                            <Label x:Name="changeLocation" TextColor="#000000" FontSize="13"></Label>
+                                        </StackLayout>
+                                    </StackLayout>
+
+                                    <StackLayout Orientation="Horizontal" Padding="20,15,0,0" >
+                                        <StackLayout Padding="0,0,15,0">
+                                            <Image x:Name="notification" Source="notification.png" WidthRequest="30" HeightRequest="30"></Image>
+                                        </StackLayout>
+                                        <StackLayout>
+                                            <Label Text="Notifications" TextColor="#000000" FontSize="17" FontAttributes="Bold" ></Label>
+                                        </StackLayout>
+                                    </StackLayout>
+                                </StackLayout>
+                                <BoxView HeightRequest="1" Color="Black" Opacity="0.5"></BoxView>
+                            </StackLayout>
+                            <StackLayout  BackgroundColor="White" Padding="0,10,0,0" Margin="0,0,0,10">
+                                <Label Text="Help" TextColor="Black" FontAttributes="Bold" FontSize="20" Margin="20,0"></Label>
+                                <StackLayout Orientation="Horizontal" Padding="30,10,0,0" >
+                                    <StackLayout Padding="0,0,15,0">
+                                        <Image Source="help.png" WidthRequest="30" HeightRequest="30"></Image>
+                                    </StackLayout>
+                                    <StackLayout>
+                                        <Label Text="Help" TextColor="#000000" FontSize="17" FontAttributes="Bold" ></Label>
+                                    </StackLayout>
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal" Padding="30,10,0,0" >
+                                    <StackLayout Padding="0,0,15,0">
+                                        <ImageButton  Clicked="EditProfile_Clicked" BackgroundColor="Transparent" Source="edit.png" WidthRequest="30" HeightRequest="30"></ImageButton>
+                                    </StackLayout>
+                                    <StackLayout>
+                                        <Label x:Name="editProfile" Text="Edit Profile" TextColor="#cba135" FontSize="17" FontAttributes="Bold" ></Label>
+                                    </StackLayout>
+                                </StackLayout>
+                                <BoxView HeightRequest="1" Color="Black" Opacity="0.5"></BoxView>
+                            </StackLayout>
+                            <StackLayout Padding="0,5,0,0">
+                                <Button Text="LOG OUT" 
+                        FontSize="14" 
+                        FontAttributes="Bold"
+                        TextColor="#EEEEEE" 
+                        BackgroundColor="#E6B614"
+                        CornerRadius="20" 
+                        HeightRequest="40"                         
+                        WidthRequest="250" 
+                        HorizontalOptions="Center" 
+                         Clicked="Logout_Clicked"/>
+                            </StackLayout>
+                            <StackLayout Padding="0,0,0,20" HorizontalOptions="Center">
+                                <Image Source="goldenshelf.png" HeightRequest="200" Margin="0,40,0,0" />
+                                <Label Text="GoldenShelf" FontSize="35" FontAttributes="Bold" TextColor="Black" HorizontalOptions="Center"/>
+                                <Label Text="version 1.0.0" FontSize="12"  TextColor="Black" HorizontalOptions="Center"/>
+                            </StackLayout>
+                        </StackLayout>
+                    </ScrollView>
+                </ContentPage>
+            </ShellContent>
+        </Tab>
+
+    </FlyoutItem>
+</Shell>

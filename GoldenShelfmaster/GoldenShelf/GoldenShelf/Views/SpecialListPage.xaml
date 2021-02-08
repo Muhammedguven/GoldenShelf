@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:Converter="clr-namespace:GoldenShelf.Converters"
+             x:Class="GoldenShelf.Views.SpecialListPage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Converter:ByteArrayToImageSourceConverter x:Key="bic"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout Orientation="Horizontal" Padding="10,20,85,0">
+                <Image x:Name="back" Source="back.png" HeightRequest="25" HorizontalOptions="StartAndExpand"/>
+                <Image Source="goldenshelf.png" HeightRequest="30" HorizontalOptions="Center"></Image>
+                <Label x:Name="shareName" Text="" FontAttributes="Bold" FontSize="30" TextColor="Black" HorizontalOptions="Center" Padding="0,0,50,0"></Label>
+            </StackLayout>
+            <Label  x:Name="howMany"   Text="" FontSize="14"  TextColor="Black" FontAttributes="Italic" Padding="10,0,0,0" HorizontalTextAlignment="Start" ></Label>
+            <ListView x:Name="SpecialListView" IsPullToRefreshEnabled="True"
+                      Margin="10,0"
+                      RowHeight="120" 
+                      Header=""
+                      RefreshCommand="{Binding RefreshCommand}"
+                      IsRefreshing="{Binding IsRefreshing}" 
+                      ItemTapped="SpecialListView_ItemTapped">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell >
+                            <Frame  BackgroundColor="#cba135" CornerRadius="20" Margin="0,5" Padding="5,0">
+                                <StackLayout Orientation="Horizontal"  Padding="20,5,0,0">
+                                    <StackLayout Orientation="Vertical" HorizontalOptions="Start">
+                                        <Image Source="{Binding Image,Converter={StaticResource bic}}" Aspect="AspectFill"  WidthRequest="80" HeightRequest="100" HorizontalOptions="Start"></Image>
+                                       
+                                    </StackLayout>
+
+                                    <StackLayout  Padding="50,0,0,0" HorizontalOptions="Center" >
+                                        <StackLayout HorizontalOptions="StartAndExpand">
+                                            <Label Text="{Binding BookName}" FontAttributes="Bold" TextColor="White" FontSize="17"  HorizontalTextAlignment="Start"></Label>
+                                            <Label Text="{Binding BookAuthor}" FontAttributes="Bold" TextColor="White" FontSize="12"  HorizontalTextAlignment="Start"></Label>
+                                        </StackLayout>
+                                            
+                                       
+                                        <StackLayout Orientation="Horizontal" VerticalOptions="End" HorizontalOptions="Start" Padding="0,30,0,0">
+                                            <Label Text="{Binding Condition}" TextColor="White" FontSize="12"  HorizontalTextAlignment="Start"></Label>
+                                            <Label Text="/" TextColor="White"></Label>
+                                            <Label Text="{Binding BookCategory}" TextColor="White" FontSize="12"  HorizontalTextAlignment="Start"></Label>
+                                        </StackLayout>
+                                    </StackLayout>
+                                    
+
+
+
+                                </StackLayout>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

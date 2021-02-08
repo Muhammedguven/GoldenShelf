@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GoldenShelf.Views.FilterPage"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="#EEEEEE">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout BackgroundColor="White" Padding="0,20">
+                <StackLayout Orientation="Horizontal" Padding="10,0,0,0">
+                    <Image x:Name="back" Source="back.png" HeightRequest="25" HorizontalOptions="StartAndExpand"/>
+                    <Image Source="goldenshelf.png" HeightRequest="30" HorizontalOptions="Center"></Image>
+                    <Label Text="Filter" FontAttributes="Bold" FontSize="30" TextColor="Black" HorizontalOptions="End" Padding="0,0,20,0"></Label>
+                </StackLayout>
+                <StackLayout Padding="20,15">
+                    <Label Text="Sort by" FontAttributes="Bold" FontSize="17" TextColor="DarkGray"></Label>
+
+                    <StackLayout Orientation="Horizontal" Padding="20,0">
+                        <CheckBox Color="#E6B614" CheckedChanged="Donation_CheckedChanged" x:Name="DonationCheck"/>
+                        <Label Text="Donation" TextColor="Black" FontAttributes="Bold" FontSize="20"></Label>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" Padding="20,0" >
+                        <CheckBox Color="#E6B614" CheckedChanged="Exchange_CheckedChanged" x:Name="ExchangeCheck"/>
+                        <Label Text="Exchange" TextColor="Black" FontAttributes="Bold" FontSize="20"></Label>
+                    </StackLayout>
+                    <StackLayout >
+                        <Button Clicked="Button_Clicked"  Text="APPLY" BackgroundColor="#E6B614" CornerRadius="25" Margin="50,20" TextColor="White" />
+                    </StackLayout>
+                    <Label Text="Please choose a category." IsVisible="False" x:Name="ErrorLabel" TextColor="Red" FontSize="Body" HorizontalTextAlignment="Center"/>
+                </StackLayout>
+            </StackLayout>
+
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
