@@ -10,7 +10,7 @@
   <center>
 <h1>Description about the application</h1>
 
-<h4>This application coded using Xamarin Platform which is Front-End side and MongoDB which is Back-End side. </h4>
+<h4>This application coded using Xamarin Platform which is Front-End side and C#, MongoDB which is Back-End side. </h4>
 
 <p>Thanks to GoldenShelf, our books which are read by us, will not stay on the our shelves and will contribute to recycling.</p>
 <p> It is a mobile application which can using for exchanging or donating book by users to other users. User can publish an advert then contact with other users and deal with them. Like Letgo which is active in Google PlayStore.</p>
