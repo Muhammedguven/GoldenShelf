@@ -17,7 +17,7 @@
 <p>If you create .apk folder and install your phone you can see all of the adverts and use it as you wish. Application working on MongoDB Atlas free, We have 512MB storage space so, please don't add too much adverts or users :)</p>
 <p>It's a cross platform applicaton but I did not develop IOS side of the app because I have not MacOS Device</p>
 <p> If you want to change MongoDB Connection String, you can easily found it inside the ViewModels! </p>
-<h2>Here, Some Images about Application's Views</h2>
+<h2>Here, some images about Application's Views</h2>
 
   <div>
 <img src= "Some images/Screenshot_1609745186.png" width="240" height="350">
